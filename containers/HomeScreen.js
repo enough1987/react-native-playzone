@@ -1,20 +1,20 @@
 import React from 'react';
 import {Text, View, FlatList, 
   TouchableOpacity } from 'react-native';
-
+import { connect } from 'react-redux';
 import Icon from "react-native-vector-icons/Ionicons";
 import { SearchBar } from 'react-native-elements';
 
 import { styles } from "../App";
 import Header from "../components/Header";
 
-export default class HomeScreen extends React.Component {
+class HomeScreen extends React.Component {
 
   constructor(props) {
     super(props);
-    console.log(window.STORE.items.length);
+    console.log(this.props);
     this.state = {
-      listData: window.STORE.items,
+      listData: this.props.items,
       search: ''
     };
   }
@@ -25,8 +25,8 @@ export default class HomeScreen extends React.Component {
 
   onPressSearch = (search) => {
     const listData = search 
-        ? window.STORE.items.filter((item) => item.text.includes(search))
-        : window.STORE.items;
+        ? this.props.items.filter((item) => item.text.includes(search))
+        : this.props.items;
     this.setState({
         listData: listData,
         search
@@ -74,3 +74,9 @@ export default class HomeScreen extends React.Component {
   }
 
 }
+  
+const mapStateToProps = state => ({
+  items: state.items.items
+});
+
+export default connect(mapStateToProps, null)(HomeScreen);

@@ -1,15 +1,17 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {View} from 'react-native';
 import { Input, Button } from 'react-native-elements';
+import { connect } from 'react-redux';
 
 import { styles } from "../App";
 import Header from "../components/Header";
+import { addItem } from "../store_actions/index";
 
-export default class CreateScreen extends React.Component {
+class CreateScreen extends React.Component {
 
     constructor(props) {
       super(props);
-      console.log(window.STORE.items.length);
+      console.log(this.props);
       this.state = {
         text: ""
       };
@@ -18,7 +20,7 @@ export default class CreateScreen extends React.Component {
     create = () => {
       console.log(' state: ', this.state);
       if (this.state.text) {
-        window.STORE.items.push({ text: this.state.text });
+        this.props.addItem({ text: this.state.text });
         this.setState({ text: '' })
       }
     }
@@ -48,3 +50,12 @@ export default class CreateScreen extends React.Component {
 
 }
   
+const mapStateToProps = state => ({
+  items: state.items.items
+})
+
+const mapDispatchToProps = dispatch => ({
+  addItem: item => dispatch(addItem(item))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CreateScreen);
