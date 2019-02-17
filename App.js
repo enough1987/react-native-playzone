@@ -7,40 +7,19 @@
  * @lint-ignore-every XPLATJSCOPYRIGHT1
  */
 
-import React from 'react';
-import { Button, StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { createStackNavigator, createAppContainer } from "react-navigation";
 
 import HomeScreen from "./containers/HomeScreen";
-import DetailsScreen from "./containers/DetailsScreen";
+import CreateScreen from "./containers/CreateScreen";
+import createStore from "./store";
 
-class Header extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    return (
-      <View style={{ flexDirection: 'row' }}>
-        <Button
-          title="Home"
-          onPress={() => this.props.navigation.navigate('Home')}
-        />
-        <Button
-          title="Details"
-          onPress={() => this.props.navigation.navigate('Details')}
-        />
-      </View>
-    );
-  }
-}
+createStore();
 
 const AppNavigator = createStackNavigator(
   {
     Home: HomeScreen,
-    Details: DetailsScreen
+    Create: CreateScreen
   },
   {
     initialRouteName: "Home"
@@ -73,6 +52,5 @@ const styles = StyleSheet.create({
   }
 });
 export {
-  styles,
-  Header
+  styles
 };

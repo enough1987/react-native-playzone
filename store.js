@@ -1,4 +1,7 @@
-export default [
+export default createStore = () => {
+  window.STORE = {};
+
+  window.STORE.items = [
     {
       text: "item 1"
     },
@@ -16,5 +19,12 @@ export default [
     },
     {
       text: "item 6"
+    },
+    {
+        text: "text 1"
+    },
+    {
+        text: "text 1.1"
     }
   ];
+}

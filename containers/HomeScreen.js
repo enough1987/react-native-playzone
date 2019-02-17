@@ -5,18 +5,18 @@ import {Text, View, FlatList,
 import Icon from "react-native-vector-icons/Ionicons";
 import { SearchBar } from 'react-native-elements';
 
-import { Header, styles } from "../App";
-import items from "../data";
+import { styles } from "../App";
+import Header from "../components/Header";
 
 export default class HomeScreen extends React.Component {
 
   constructor(props) {
     super(props);
+    console.log(window.STORE.items.length);
     this.state = {
-      listData: items,
+      listData: window.STORE.items,
       search: ''
     };
-
   }
 
   onPressItem = (text) => {
@@ -25,8 +25,8 @@ export default class HomeScreen extends React.Component {
 
   onPressSearch = (search) => {
     const listData = search 
-        ? items.filter((item) => item.text.includes(search))
-        : items;
+        ? window.STORE.items.filter((item) => item.text.includes(search))
+        : window.STORE.items;
     this.setState({
         listData: listData,
         search
@@ -54,14 +54,14 @@ export default class HomeScreen extends React.Component {
                 data={this.state.listData}
                 renderItem={({item}) => {
                 return <TouchableOpacity 
-                style={styles.topContainerItem}
-                onPress={() => this.onPressItem(item.text)}>
-                <Icon style={styles.topContainerItemIcon}
-                    name="ios-bug"
-                    color="#ccc"
-                    size={25}
-                    />
-                <Text style={styles.topContainerItemText}>{item.text}</Text>
+                  style={styles.topContainerItem}
+                  onPress={() => this.onPressItem(item.text)}>
+                  <Icon style={styles.topContainerItemIcon}
+                      name="ios-bug"
+                      color="#ccc"
+                      size={25}
+                      />
+                  <Text style={styles.topContainerItemText}>{item.text}</Text>
                 </TouchableOpacity>
                 }}
                 keyExtractor={(item, index) => index.toString()}
@@ -70,5 +70,7 @@ export default class HomeScreen extends React.Component {
 
       </View>
     );
+
   }
+
 }
