@@ -18,6 +18,7 @@ import { Provider } from 'react-redux';
 import HomeScreen from "./containers/HomeScreen";
 import CreateScreen from "./containers/CreateScreen";
 import MapScrean from "./containers/MapScrean";
+import AuthScreen from "./containers/AuthScreen";
 import appReducer from "./store_reducers/index";
 
 const store = createStore(
@@ -28,10 +29,11 @@ const Navigator = createStackNavigator(
   {
     Home: HomeScreen,
     Create: CreateScreen,
-    Map: MapScrean
+    Map: MapScrean,
+    Auth: AuthScreen
   },
   {
-    initialRouteName: "Home"
+    initialRouteName: "Auth"
   }
 );
 const AppContainer = createAppContainer(Navigator);
@@ -55,6 +57,13 @@ const styles = StyleSheet.create({
   map: {
     width: "100%",
     height: "50%"
+  },
+  textInput: {
+    height: 40,
+    padding: 6,
+    marginBottom: 6,
+    borderColor: 'blue',
+    borderWidth: 1
   },
   searchInput: {
     borderColor: '#bbb',
