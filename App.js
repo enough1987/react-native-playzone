@@ -27,10 +27,18 @@ const store = createStore(
 
 const Navigator = createStackNavigator(
   {
-    Home: HomeScreen,
-    Create: CreateScreen,
-    Map: MapScrean,
-    Auth: AuthScreen
+    Home: {
+      screen: HomeScreen,
+    },
+    Create: {
+      screen: CreateScreen,
+    },
+    Map: {
+      screen: MapScrean,
+    },
+    Auth: {
+      screen: AuthScreen,
+    }
   },
   {
     initialRouteName: "Auth"
@@ -52,7 +60,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    padding: 10
+    padding: 10,
+
   },
   map: {
     width: "100%",

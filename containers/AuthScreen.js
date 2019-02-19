@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Button, TextInput} from 'react-native';
+import {View, Button, Text , TextInput, AsyncStorage} from 'react-native';
 import { connect } from 'react-redux';
 
 import { styles } from "../App";
@@ -9,6 +9,7 @@ class AuthScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
+        loading: true,
         form: 'login',
         signup: {
             login : {
@@ -45,6 +46,19 @@ class AuthScreen extends React.Component {
             }         
         }
     };
+
+    this.chachTocken();
+  }
+
+  chachTocken = async () => {
+    const userToken = await AsyncStorage.getItem('userToken');
+    if (userToken) {
+        console.log('TOCKEN');
+        this.props.navigation.replace('Home');
+    }
+    this.setState({
+        loading: true
+    });
   }
 
   switchForm = () => {
@@ -57,7 +71,8 @@ class AuthScreen extends React.Component {
   }
 
 
-  submit = () => {
+  submit = async () => {
+    await AsyncStorage.setItem('userToken', 'true');
     this.props.navigation.replace('Home');
   }
 
@@ -74,7 +89,12 @@ class AuthScreen extends React.Component {
   }
 
   render() {
-    console.log(this.state.form);
+    if( this.state.loading ) {
+       return <View style={styles.container} >
+        <Text> Loading ... </Text>
+       </View> 
+    }
+ 
     return (
       <View style={styles.container} >
 
