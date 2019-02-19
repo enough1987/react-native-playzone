@@ -17,6 +17,7 @@ import { Provider } from 'react-redux';
 
 import HomeScreen from "./containers/HomeScreen";
 import CreateScreen from "./containers/CreateScreen";
+import MapScrean from "./containers/MapScrean";
 import appReducer from "./store_reducers/index";
 
 const store = createStore(
@@ -26,7 +27,8 @@ const store = createStore(
 const Navigator = createStackNavigator(
   {
     Home: HomeScreen,
-    Create: CreateScreen
+    Create: CreateScreen,
+    Map: MapScrean
   },
   {
     initialRouteName: "Home"
@@ -49,6 +51,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'white',
     padding: 10
+  },
+  map: {
+    width: "100%",
+    height: "50%"
   },
   searchInput: {
     borderColor: '#bbb',

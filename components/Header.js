@@ -19,6 +19,10 @@ export default class Header extends React.Component {
             title="Create"
             onPress={() => this.props.navigation.navigate('Create')}
           />
+          <Button
+            title="Map"
+            onPress={() => this.props.navigation.navigate('Map')}
+          />
         </View>
       );
     }
